@@ -1,7 +1,8 @@
 # auv_summer_2019
 
 [geeks_for_geeks](https://www.geeksforgeeks.org/)
-_My name is sudip chakraborty_ I am an IITIAN
+_My name is sudip chakraborty_ 
+I studied in IIT KHARAGPUR
 ___
 **Hey what** are you writting
 *item 1
