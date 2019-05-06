@@ -137,7 +137,45 @@ there is a detailed discussion about ros::spin()
 ___
 ## Simple_Action_Client
 ```
+#include <ros/ros.h>
+#include <actionlib/client/simple_action_client.h>// is the action library used from implementing simple action clients. 
+#include <actionlib/client/terminal_state.h>// defines the possible goal states. 
+#include <actionlib_tutorials/FibonacciAction.h>//this includes the messages genarated from the .action file
 
+int main (int argc, char **argv)
+{
+  ros::init(argc, argv, "test_fibonacci");
+
+  // create the action client
+  // true causes the client to spin its own thread
+  actionlib::SimpleActionClient<actionlib_tutorials::FibonacciAction> ac("fibonacci", true); 
+  
+  /*here the action client has defined .It takes two arguments the first is the server name to which it should be connected and second is the boolean type word to automatically spin the thread*/
+
+  ROS_INFO("Waiting for action server to start.");
+  // wait for the action server to start
+  ac.waitForServer(); //will wait for infinite time
+
+  ROS_INFO("Action server started, sending goal.");
+  // send a goal to the action
+  actionlib_tutorials::FibonacciGoal goal;
+  goal.order = 20;
+  ac.sendGoal(goal);
+
+  //wait for the action to return
+  bool finished_before_timeout = ac.waitForResult(ros::Duration(30.0));
+
+  if (finished_before_timeout)
+  {
+    actionlib::SimpleClientGoalState state = ac.getState();
+    ROS_INFO("Action finished: %s",state.toString().c_str());
+  }
+  else
+    ROS_INFO("Action did not finish before the time out.");
+
+  //exit
+  return 0;
+}
 
 ```
 
@@ -183,6 +221,34 @@ add_dependencies(
  * Do not forget to add actionlib_msgs in the CMakeList.txt
  * And add <br />
  >first add_executable followed by target_link_libraries followed by add_dependences
+ 
+ ___
+ ## Running the action client amd the server
+ * 1st start the rosmaster that will connect all the nodes
+ > $ roscore <br />
+ * build the programms 
+ > $ cd auv_summer <br />
+   $ catkin_make
+ * start the action_server and action_client in other terminals in any order
+ > $ rosrun actionlib_tutorials fibonacci_server<br /> 
+   $ rosrun actionlib_tutorial fibonacci_client
+   
+ **other commands**
+ >$ rostopic echo [topic] <br />
+  $ rostopic echo /fibonacci/feedback <br />
+
+will give you information about that topic<br />
+> $ rostopic list -h <br />
+will give all the list of commands ie,<br />
+
+
+|number|command|result|
+|------|-------|------|
+|1|$ rosrun list -h|list of all command|
+|2|$ rosrun list -s|list of all subscriber|
+|3|$ rosrun list -p| list of publisher node|
+|4|$ rqt_graph | diagram of how all the nodes are connected|
+|5|$  rostopic list -v|description of the topoics|
  
  
  
