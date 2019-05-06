@@ -130,8 +130,16 @@ ___
    }
 
 ```
+spin() just lets all the callbacks get called for your subscribers<br />
+when you do have a subscriber, all of your code runs then you put a spin() at the end to keep the program from just exiting when it reaches the end of main(). Instead of exiting, a loop continuously runs to allow the callbacks to be called when a new message arrives. To be clear, ROS will not process any callback until spin() is called. <br />
 there is a detailed discussion about ros::spin()     
   [ros::spin](http://wiki.ros.org/roscpp/Overview/Callbacks%20and%20Spinning)
+___
+## Simple_Action_Client
+```
+
+
+```
 
 
 
