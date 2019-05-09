@@ -16,7 +16,8 @@ The smach viewer is a GUI that shows the state of hierarchical SMACH state machi
 * **depth view**
 * **tree view**
 * The image below shows an example state machine used to coordinate actionlib actions that allow the PR2 robot to charge itself at a standard outlet. <br />
-![](http://wiki.ros.org/pr2_plugs_executive?action=AttachFile&do=get&target=smach.png)
+![image](http://wiki.ros.org/pr2_plugs_executive?action=AttachFile&do=get&target=smach.png)
+
 
 
 **smach messages**
@@ -108,7 +109,8 @@ ___
                                                'outcome2':'outcome4'})
    * so here we have to specify the transittions when the robot will be on that state.
   * then please jump to the outcome which is lebbel "bar " or "outcome 4"
-  * thus we connect one state to oother state
+  * thus we connect one state to oother state <br />
+![image](http://wiki.ros.org/smach/Tutorials/Getting%20Started?action=AttachFile&do=get&target=simple.png)
   
   > if __name__ == '__main__':<br />
  main()
@@ -121,5 +123,67 @@ ___
  
  ___
  ## Creating a Hierarchical State Machine
+ **Creating some states**
+ ```
+       # State Foo
+      class Foo(smach.State):
+         def __init__(self, outcomes=['outcome1', 'outcome2'])
+         
+         def execute(self, userdata):
+            return 'outcome1'
+    
+    
+      # State Bar
+     class Bar(smach.State):
+        def __init__(self, outcomes=['outcome1'])
+        
+        def execute(self, userdata):
+           return 'outcome4'
+   
+   
+     # State Bas
+     class Bas(smach.State):
+        def __init__(self, outcomes=['outcome3'])
+       
+        def execute(self, userdata):
+           return 'outcome3'
  
+ ```
+ * here Foo bar and Bas state are added
+ 
+**Creating a hierarchical state machine**
+```
+      # Create the top level SMACH state machine
+       sm_top = smach.StateMachine(outcomes=['outcome5'])
+   
+       # Open the container
+       with sm_top:
+   
+           smach.StateMachine.add('BAS', Bas(),
+                                  transitions={'outcome3':'SUB'})
+   
+           # Create the sub SMACH state machine 
+           sm_sub = smach.StateMachine(outcomes=['outcome4'])
+   
+           # Open the container 
+           with sm_sub:
+   
+               # Add states to the container 
+               smach.StateMachine.add('FOO', Foo(),
+                                      transitions={'outcome1':'BAR', 
+                                                   'outcome2':'outcome4'})
+               smach.StateMachine.add('BAR', Bar(),
+                                      transitions={'outcome1':'FOO'})
+   
+           smach.StateMachine.add('SUB', sm_sub,
+                                  transitions={'outcome4':'outcome5'})
+
+
+```
+* in this case note that 1st we create a **sm_top** state machine and initiatete it.
+   * with in the **sm_top** we added **Bas** state and a **sm_sub** state machine 
+      * **sm_sub** state machine contain to stae **Bar** and **Foo**.
+* there connection looks like <br />
+![image](http://wiki.ros.org/smach/Tutorials/Create%20a%20hierarchical%20state%20machine?action=AttachFile&do=get&target=sm_expanded.png)
+
  
