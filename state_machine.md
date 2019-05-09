@@ -1,4 +1,36 @@
 # State Machine(smach)
+smach(state machine) is a task-level architecture for rapidly creating complex robot behavior. At its core, SMACH is a ROS-independent Python library to build hierarchical state machines. <br />
+
+## when should one use smach?
+SMACH is useful when you want a robot to execute some complex plan, where all possible states and state transitions can be described explicitly
+* **Fast prototyping:** The straightforward Python-based SMACH syntax makes it easy to quickly prototype a state machine and start running it.
+* **Complex state machines:** SMACH allows you to design, maintain and debug large, complex hierarchical state machines. You can find an example of a complex hierarchical state machine here. 
+* **Introspection:** SMACH gives you full introspection in your state machines, state transitions, data flow, etc. See the smach_viewer for more details. 
+## you should not use smach when:
+* **Unstructured tasks:** SMACH will fall short as the scheduling of your task becomes less structured.
+
+* **Low-level systems:** SMACH is not meant to be used as a state machine for low-level systems that require high efficiency, SMACH is a task-level architecture. 
+## smach viewer:
+The smach viewer is a GUI that shows the state of hierarchical SMACH state machines. It can visualize the possible transitions between states, as well as the currently active state and the values of user data that is passed around between states. The smach viewer uses the SMACH debugging interface based on the **smach messages** to gather information from running state machines.<br />
+* **graph view**
+* **depth view**
+* **tree view**
+* The image below shows an example state machine used to coordinate actionlib actions that allow the PR2 robot to charge itself at a standard outlet. <br />
+![image](http://wiki.ros.org/pr2_plugs_executive?action=AttachFile&do=get&target=smach.png)
+
+
+**smach messages**
+* The smach messages are only used for communication between the introspection server and the smach viewer, and are considered part of the internal ROS API. 
+    * [SmachContainerInitialStatusCmd](http://docs.ros.org/api/smach_msgs/html/msg/SmachContainerInitialStatusCmd.html)
+    * [SmachContainerStatus](http://docs.ros.org/api/smach_msgs/html/msg/SmachContainerStatus.html)
+    * [SmachContainerStructure](http://docs.ros.org/api/smach_msgs/html/msg/SmachContainerStructure.html)
+
+
+
+
+
+
+___
 **An example of smach package**
 
 >   import rospy <br />
@@ -85,3 +117,9 @@
  ___
  
  ## passing user data between state
+ 
+ 
+ ___
+ ## Creating a Hierarchical State Machine
+ 
+ 
