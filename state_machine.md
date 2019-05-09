@@ -186,4 +186,32 @@ ___
 * there connection looks like <br />
 ![image](http://wiki.ros.org/smach/Tutorials/Create%20a%20hierarchical%20state%20machine?action=AttachFile&do=get&target=sm_expanded.png)
 
+## Calling Actions from a State Machine (ROS)
+**Empty goal message**
+```
+   sm = StateMachine(['succeeded','aborted','preempted'])
+    with sm:
+        smach.StateMachine.add('TRIGGER_GRIPPER',
+                                  SimpleActionState('action_server_namespace',
+                                                 GripperAction),
+                               transitions={'succeeded':'APPROACH_PLUG'})
+
+```
+**Fixed goal message**
+please import these  librarie:
+
+> 
+```
+   sm = StateMachine(['succeeded','aborted','preempted'])
+    with sm:
+        gripper_goal = Pr2GripperCommandGoal()
+        gripper_goal.command.position = 0.07
+        gripper_goal.command.max_effort = 99999
+        StateMachine.add('TRIGGER_GRIPPER',
+                          SimpleActionState('action_server_namespace',
+                                            GripperAction,
+                                            goal=gripper_goal),
+                          transitions={'succeeded':'APPROACH_PLUG'})```
+
+```
  
