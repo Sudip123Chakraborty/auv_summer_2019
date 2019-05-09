@@ -16,7 +16,7 @@ The smach viewer is a GUI that shows the state of hierarchical SMACH state machi
 * **depth view**
 * **tree view**
 * The image below shows an example state machine used to coordinate actionlib actions that allow the PR2 robot to charge itself at a standard outlet. <br />
-![image](http://wiki.ros.org/pr2_plugs_executive?action=AttachFile&do=get&target=smach.png)
+![](http://wiki.ros.org/pr2_plugs_executive?action=AttachFile&do=get&target=smach.png)
 
 
 **smach messages**
