@@ -18,6 +18,8 @@ The smach viewer is a GUI that shows the state of hierarchical SMACH state machi
 * The image below shows an example state machine used to coordinate actionlib actions that allow the PR2 robot to charge itself at a standard outlet. <br />
 ![image](http://wiki.ros.org/pr2_plugs_executive?action=AttachFile&do=get&target=smach.png)
 
+* The red boxes show the possible outcomes of the state machine container: outcome4 and outcome5. 
+
 
 
 **smach messages**
@@ -111,6 +113,10 @@ ___
   * then please jump to the outcome which is lebbel "bar " or "outcome 4"
   * thus we connect one state to oother state <br />
 ![image](http://wiki.ros.org/smach/Tutorials/Getting%20Started?action=AttachFile&do=get&target=simple.png)
+
+* The red boxes show the possible outcomes of the state machine container: outcome4 and outcome5. 
+
+
   
   > if \__name__ == '\__main__':<br />
  main()
@@ -119,6 +125,51 @@ ___
  ___
  
  ## passing user data between state
+ 
+ * here user data means basically the input and out put keys. or the input and output data of a state machine.
+ ```
+  class Foo(smach.State):
+     def __init__(self, outcomes=['outcome1', 'outcome2'],
+                        input_keys=['foo_input'],
+                        output_keys=['foo_output'])
+
+ ```
+ here while initiating the state machine we have also mentioned the user data as:
+ * input keys --that is needed for  a state to run
+ * output keys -- that a state should provide after the  state is ended.
+ * the interface of a stste machine will be ike:
+ ![image](http://wiki.ros.org/smach/Tutorials/User%20Data?action=AttachFile&do=get&target=user_data_single.png)
+ 
+ ## connecting user data
+ when you a add multiple state in your state machine then you should mention their connectivity and their data exchange relation<br /> 
+ their cames **re mapping concepts**
+ ```
+ sm_top = smach.StateMachine(outcomes=['outcome4','outcome5'],
+                          input_keys=['sm_input'],
+                          output_keys=['sm_output'])
+  with sm_top:
+     smach.StateMachine.add('FOO', Foo(),
+                            transitions={'outcome1':'BAR',
+                                         'outcome2':'outcome4'},
+                            remapping={'foo_input':'sm_input',
+                                       'foo_output':'sm_data'})
+     smach.StateMachine.add('BAR', Bar(),
+                            transitions={'outcome2':'FOO'},
+                            remapping={'bar_input':'sm_data',
+                                       'bar_output1':'sm_output'})
+ ```
+ * as in this state machine their are multiple  state so we just not only initiatate it with possible outcomes we initiatate with  userdata.
+ * here in the state the remapping of the datas are also shown and their transition state.
+ > in remapping we make both the datas pointing to a certain value .<br />
+ means make those data equal to each other.
+ 
+ 
+ * so if I make **foo_output**=**sm_output**
+ thats means **sm_output**=**foo_output**
+ * both the datas change simultaneously to a certain value.<br />
+ 
+ In the above example the state and their data exchange are related to like this one:
+ ![image](http://wiki.ros.org/smach/Tutorials/User%20Data?action=AttachFile&do=get&target=user_data.png)
  
  
  ___
