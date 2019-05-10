@@ -9,10 +9,10 @@
  > $ cd ~/catkin_ws/
  > $ catkin_make
  
- * Running the catkin_make command first time will build
-  * build
-  * devel
-  * CMakeList.txt inside the source file
+ * Running the catkin_make command first time will build<br />
+   * build
+   * devel
+   * CMakeList.txt inside the source file
 
 
  
