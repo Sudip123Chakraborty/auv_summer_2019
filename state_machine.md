@@ -249,7 +249,9 @@ ___
 
 ```
 **Fixed goal message**
-please import these  librarie:
+please import these  librarie:   from smach_ros import SimpleActionState
+
+### Fixexd goal message
 
 > 
 ```
@@ -266,3 +268,46 @@ please import these  librarie:
 
 ```
  
+
+Instead of writting **goal=gripper_goal** you can also write **goal_slot={ position,max_effort}** 
+
+### goal from userdata
+if you want to set goal from user data do like this:
+```
+sm = StateMachine(['succeeded','aborted','preempted'])
+with sm:
+    StateMachine.add('TRIGGER_GRIPPER',
+                      SimpleActionState('action_server_namespace',
+                                        GripperAction,
+                                        goal_slots=['max_effort', 
+                                                    'position']),
+                      transitions={'succeeded':'APPROACH_PLUG'},
+                      remapping={'max_effort':'user_data_max',
+                                 'position':'user_data_position'})
+
+```
+so you have to declare goal_slots and connect their variables through remapping;<br />
+
+if you to do it by goal_callback do it by like :
+* first define goal_callback function with in the state machine:
+```
+with sm:
+    def gripper_goal_cb(userdata, goal):
+       gripper_goal = GripperGoal()
+       gripper_goal.position.x = 2.0
+       gripper_goal.max_effort = userdata.gripper_input
+       return gripper_goal
+```
+then in the **SimpleActionState function add this argument instead of goal_slots**
+> goal_cb=gripper_callback ---the name of the function<br />
+> add input_keys=['gripper_input']<br />
+
+so the final defination of adding the state will be like:
+> StateMachine.add{"name_of_the_state_machine",SimpleActionState("action_server_name",GripperAction,goal_cb=name+of_the callback_function,inputkeys,transition,remapping)}<br />
+
+## Viewing State Machines :
+it is same as state machine viewer.
+[state_machine_viewer](http://wiki.ros.org/smach/Tutorials/Smach%20Viewer)
+
+
+
