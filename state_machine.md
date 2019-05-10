@@ -112,7 +112,7 @@ ___
   * thus we connect one state to oother state <br />
 ![image](http://wiki.ros.org/smach/Tutorials/Getting%20Started?action=AttachFile&do=get&target=simple.png)
   
-  > if __name__ == '__main__':<br />
+  > if \__name__ == '\__main__':<br />
  main()
  
  * here we are calling the main function .
