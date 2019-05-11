@@ -398,6 +398,27 @@ In this example, the outcomes now include preempted, a default outcome of the it
 
 
 
+## CBState
+This state simply executes a single callback when the state is executed. This is useful for executing arbitrary code in a state, without having to declare a new state class.<br />
+The CBState calls the callback with at least one argument: the container's userdata. Additional arguments and keyword arguments can be given to the CBState on construction. These args will be passed into the callback when the CBState is executed. <br />
+```
+@smach.cb_interface(input_keys=['q'],
+                    output_keys=['xyz'],
+                    outcomes=['foo'])
+def my_cb(ud, x, y, z):
+    ud.xyz = ud.q + x + y + z
+    return 'foo'
+...
+with sm:
+    ...
+    StateMachine.add('MY_CB', CBState(my_cb,
+                                      cb_args=[10],
+                                      cb_kwargs={'z':2,'y':3}),
+                              {'foo':'OTHER_STATE'})
+    
+```
+you have to include this libraries:
+> from smach import CBState.
 
 
 
