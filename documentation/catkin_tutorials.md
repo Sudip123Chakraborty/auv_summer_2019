@@ -53,7 +53,28 @@ For a package to be considered a catkin package it must meet a few requirements:
  > $ cd catkin_ws
  > $ catkin_make
  
- t
+ ## dependencies in rospackage
+ **1st order dependencies**
+ * when you create your catkin_package then you provide some dependences they are the 1st order dependences.
+ * we can know the 1st order dependences by <br />
+ > $ rospack depends1 [package_name]
+ you will see omething like it:
+ ```
+ rospy
+ roscpp
+ std_msgs
+ 
+ ```
+* this dependecies can also has their own dependences
+> $ rospack depends1 rospy
+
+    genpy
+    roscpp
+    rosgraph
+    rosgraph_msgs
+    roslib
+    std_msgs
+ ___
  ## Limitation of catkin_make
  All commands being executed as part of CMake and make use the same environment as the invocation. One example is a rostest being run as part of the tests. If the test itself depends on Python code which is e.g. being generated the path containing the generated code is not necessarily on the PYTHONPATH. catkin_make does not provide a mechanism to work around this problem. There are two workarounds for this problem:
 
