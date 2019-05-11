@@ -39,7 +39,7 @@ For a package to be considered a catkin package it must meet a few requirements:
         
   
   
-  ## creating a catkin_packaget
+  ## creating a catkin_package
   after creating the catkin_ws 
   
   now to make a new catkin package 
@@ -53,5 +53,21 @@ For a package to be considered a catkin package it must meet a few requirements:
  > $ cd catkin_ws
  > $ catkin_make
  
- 
+ t
+ ## Limitation of catkin_make
+ All commands being executed as part of CMake and make use the same environment as the invocation. One example is a rostest being run as part of the tests. If the test itself depends on Python code which is e.g. being generated the path containing the generated code is not necessarily on the PYTHONPATH. catkin_make does not provide a mechanism to work around this problem. There are two workarounds for this problem:
+
+    You need to update the environment manually before running the tests. This can be achieved by the following sequence of commands:
+
+        catkin_make
+
+        . devel/setup.bash
+
+        catkin_make run_tests 
+
+    The tool catkin_make_isolated which invoked CMake / make for each ROS package separately can handle this use case without a problem. The following command sequence just works:
+
+        catkin_make_isolated
+
+        catkin_make_isolated --make-args run_tests
   
