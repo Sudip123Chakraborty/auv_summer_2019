@@ -131,4 +131,4 @@ Python has a set of built-in methods that you can use on dictionaries.
 for x in range(2, 30, 3):
   print(x)
 ```
-here it  will print like this:
+here it  will print like this:2 5 8 11 14 17 20 23 26 29
