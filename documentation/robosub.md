@@ -38,6 +38,6 @@ for  the  Autonomy  andControls systems.
   * They use **faster R-CNN** for object detecting.
     *.  Faster  R-CNN uses a convolutional neural network to draw accurate andprecise bounding boxes around target objects
     
-    
-    ## National University of Singapore - Special Award (Static Judging):([Link](https://robonation.org/sites/default/files/MontanaStateUni_2016_RoboSub_Journal.pdf)):
+    ___
+## National University of Singapore - Special Award (Static Judging):([Link](https://robonation.org/sites/default/files/MontanaStateUni_2016_RoboSub_Journal.pdf)):
     
