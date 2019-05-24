@@ -30,7 +30,7 @@ for  the  Autonomy  andControls systems.
   *The  mission  planner  wasre-written  using  ROS’  SMACH  library  
   
   ___
-  # Montana State University([Link](https://robonation.org/sites/default/files/MontanaStateUni_2016_RoboSub_Journal.pdf))
+  # 2.Montana State University([Link](https://robonation.org/sites/default/files/MontanaStateUni_2016_RoboSub_Journal.pdf))
   * They have done the whole things in **ROS** and the code was written in **python**
   * Used **exteneded kalmen filter ** for path estimation 
   *The downward stereo camerasprovide odometry information using an library called libviso2.
@@ -39,5 +39,7 @@ for  the  Autonomy  andControls systems.
     *.  Faster  R-CNN uses a convolutional neural network to draw accurate andprecise bounding boxes around target objects
     
     ___
-## National University of Singapore - Special Award (Static Judging):([Link](https://robonation.org/sites/default/files/MontanaStateUni_2016_RoboSub_Journal.pdf)):
+# 3.National University of Singapore - Special Award (Static Judging):([Link](https://robonation.org/sites/default/files/MontanaStateUni_2016_RoboSub_Journal.pdf)):
+
+
     
