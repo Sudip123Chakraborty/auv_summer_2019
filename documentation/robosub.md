@@ -123,6 +123,22 @@ The   serial application handles communication to and from the microcontroller a
 **They wrote programe in openGL**
 
 ___
+## 6. Oregon Institute of Technology, OTUS/AUVSI Club:([Link](https://robonation.org/sites/default/files/OregonTech_2016_RoboSub_Journal%20%281%29.pdf)):
+
+The machine codes running in the robot on target computer are downloaded after compiling Simulink with Embedded MATLAB files through the host laptop computer, equipped Real-time Workshop and with 2010 VC++ compiler and later updated by Windows SDK 7.1.
+
+## 7.Northwestern Polytechnical University:([Link](https://robonation.org/sites/default/files/NorthwesternPolyUniTeamNACIT_2016_RoboSub_Journal.pdf)):
+
+The software system of Paxer consists of two-tierstructures of the:<br />
+
+|Name|work|
+|----|----|
+|host computer (HC)| The host computer is operation command center of the vehicle and responsible for dealing with the information|
+|slave computer(SC)|slave computer uploads, judging and deciding the actions, then sending instructions to the slave computer which will then reassign to the execution mechanism including thrusters, grabber and so on to accomplish the given task|
+
+
+
+
 
 
 
