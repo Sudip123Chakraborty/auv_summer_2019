@@ -14,7 +14,7 @@ int max_thresh = 255;
 RNG rng(12345);
 
 int thresh =40;
-int AREA=200;
+int AREA=1000;
 
 
 void thresh_callback();
